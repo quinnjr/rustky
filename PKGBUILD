@@ -1,6 +1,6 @@
-# Maintainer: Joseph <joseph@pegasusheavyindustries.com>
+# Maintainer: Joseph Quinn <quinn.josephr@protonmail.com>
 pkgname=rustky
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 pkgdesc='A modern conky-like system monitor for Wayland'
 arch=('x86_64')
