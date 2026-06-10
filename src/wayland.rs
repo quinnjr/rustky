@@ -156,7 +156,9 @@ pub fn run(cfg: Config, renderer: Renderer, monitor: Monitor) {
 
     let wayland_source = WaylandSource::new(conn, event_queue);
     loop_handle
-        .insert_source(wayland_source, |_, _, _| Ok(0usize))
+        .insert_source(wayland_source, |_, queue, state| {
+            queue.dispatch_pending(state)
+        })
         .expect("failed to insert wayland source");
 
     event_loop
