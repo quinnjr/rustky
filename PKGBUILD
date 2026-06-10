@@ -1,11 +1,11 @@
 # Maintainer: Joseph Quinn <quinn.josephr@protonmail.com>
 pkgname=rustky
-pkgver=0.1.1
+pkgver=0.1.2
 pkgrel=1
 pkgdesc='A modern conky-like system monitor for Wayland'
 arch=('x86_64')
 license=('MIT')
-depends=('wayland' 'ttf-dejavu')
+depends=('wayland')
 makedepends=('cargo' 'wayland-protocols')
 optdepends=(
   'python: Python scripting support (build with python-scripting feature)'

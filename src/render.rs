@@ -28,7 +28,10 @@ pub fn parse_hex_color(hex: &str) -> Color {
 
 impl Renderer {
     pub fn new(font_size: f32, fg_hex: &str, bg_hex: &str) -> Self {
-        let font_data = include_bytes!("/usr/share/fonts/TTF/DejaVuSansMono.ttf");
+        let font_data = include_bytes!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/assets/fonts/DejaVuSansMono.ttf"
+        ));
         let typeface =
             Arc::new(Typeface::from_data(font_data.to_vec()).expect("failed to load font"));
         let font = Font::new(typeface.clone(), font_size);

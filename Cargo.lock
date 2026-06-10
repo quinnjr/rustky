@@ -1240,7 +1240,7 @@ dependencies = [
 
 [[package]]
 name = "rustky"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "calloop",
  "calloop-wayland-source",
