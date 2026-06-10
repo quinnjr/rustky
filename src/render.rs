@@ -157,3 +157,36 @@ impl Renderer {
         surface.pixels().to_vec()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::styled::StyledLine;
+
+    fn render_text(text: &str) -> Vec<u8> {
+        let renderer = Renderer::new(13.0, "#ffffff", "#000000");
+        let lines = vec![StyledLine::plain(text.to_string())];
+        renderer.render_styled_lines_scroll(&lines, 100, 40, 0.0)
+    }
+
+    fn lit_pixels(pixels: &[u8]) -> usize {
+        // background is opaque black; any non-zero RGB channel means a glyph pixel
+        pixels
+            .chunks_exact(4)
+            .filter(|p| p[0] > 0 || p[1] > 0 || p[2] > 0)
+            .count()
+    }
+
+    #[test]
+    fn space_renders_no_pixels() {
+        assert_eq!(lit_pixels(&render_text(" ")), 0);
+    }
+
+    #[test]
+    fn glyph_renders_sparse_coverage() {
+        let lit = lit_pixels(&render_text("i"));
+        assert!(lit > 0, "glyph 'i' should produce some pixels");
+        // placeholder code fills a solid 6.5x13 box (~84 px); a real 'i' is far sparser
+        assert!(lit < 40, "glyph 'i' too dense ({lit} px) — looks like a solid box");
+    }
+}
